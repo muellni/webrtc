@@ -1,8 +1,15 @@
 cmake_minimum_required(VERSION 2.6)
 project(video)
 
-include_directories(${CMAKE_SOURCE_DIR})
-
 file(GLOB src_file ./*.cc)
 
-add_library(video STATIC ${src_file})
+webrtc_add_library(video
+  SOURCES ${src_file}
+  DEPENDS
+    module_video_coding
+    module_pacing
+    module_rtp_rtcp
+    module_video_processing
+    video_and_call
+    voice_engine
+  )

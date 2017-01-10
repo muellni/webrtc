@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project(webrtc_engine)
+project(webrtc_full)
 
 option(WEBRTC_POSIX "" ON)
 option(WEBRTC_LINUX "" ON)
@@ -86,17 +86,19 @@ if (WEBRTC_NS_FLOAT)
   add_definitions(-DWEBRTC_NS_FLOAT)
 endif ()
 
-
-
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -std=c++11" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -std=c++11")
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-set(PATH_WEBRTC webrtc)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_subdirectory(${PATH_WEBRTC})
+#set(WEBRTC_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR} CACHE INTERNAL "")
+set(WEBRTC_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_subdirectory(webrtc)
+
+set(WEBRTC_LIBRARIES webrtc_full CACHE INTERNAL "")
 
 add_subdirectory(third_party)
-add_subdirectory(systest)
+#add_subdirectory(systest)

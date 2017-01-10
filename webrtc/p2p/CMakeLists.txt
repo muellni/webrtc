@@ -1,14 +1,12 @@
 cmake_minimum_required(VERSION 2.6)
 project(p2p)
 
-#include_directories(./base)
-#include_directories(./client)
-#include_directories(./stunprober)
-include_directories(${CMAKE_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/chromium/src)
-
 #file(GLOB lib_src ./base/*.cc ./client/*.cc ./quic/*.cc ./stunprober/*.cc)
 file(GLOB lib_src ./base/*.cc ./client/*.cc  ./stunprober/*.cc)
 
-add_library(p2p STATIC ${lib_src})
 
+webrtc_add_library(p2p
+  SOURCES ${lib_src}
+  INCLUDE_DIRECTORIES
+    ${WEBRTC_ROOT_PATH}/chromium/src
+  )

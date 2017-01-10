@@ -24,9 +24,14 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
   include_directories(/usr/include/atk-1.0/)
 endif ()
 
-include_directories(${CMAKE_SOURCE_DIR}/third_party/libyuv/include)
-include_directories(${CMAKE_SOURCE_DIR})
 #file(GLOB src_file ./base/*.cc ./devices/*.cc ./engine/*.cc )
 file(GLOB src_file ./base/*.cc  ./engine/*.cc )
 
-add_library(media STATIC ${src_file})
+webrtc_add_library(media
+  SOURCES ${src_file}
+  INCLUDE_DIRECTORIES
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../third_party/libyuv/include
+  DEFINES
+    DISABLE_MEDIA_ENGINE_FACTORY
+
+)

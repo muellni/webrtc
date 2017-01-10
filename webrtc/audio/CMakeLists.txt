@@ -4,6 +4,8 @@ project(audio)
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-file(GLOB src_file ./*.cc)
+file(GLOB src_files ./*.cc)
 
-add_library(audio STATIC ${src_file})
+webrtc_add_library(audio
+  SOURCES ${src_files}
+)

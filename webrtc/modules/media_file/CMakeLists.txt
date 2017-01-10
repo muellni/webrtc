@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 2.6)
 project(module_media_file)
 
-
-include_directories(${CMAKE_SOURCE_DIR})
-
 file(GLOB src_file ./*.cc)
 
-add_library(module_media_file STATIC ${src_file})
+webrtc_add_library(module_media_file
+  SOURCES ${src_file}
+  DEPENDS
+    common_audio
+  )
